@@ -1,1 +1,4 @@
-# This file intentionally left blank
+# AUDIO_DRIVER = pwm_hardware
+# OLED_ENABLE = yes
+# OLED_DRIVER = ssd1306
+# OLED_TRANSPORT = i2c

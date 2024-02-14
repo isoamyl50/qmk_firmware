@@ -1,29 +1,21 @@
 {
-    "manufacturer": "Hoang Nguyen",
-    "keyboard_name": "macropad_v2_rp2040",
-    "maintainer": "isoamyl50",
+    "audios": {
+        "pin": ["GP15"]
+    },
     "bootloader": "rp2040",
+    "bootloader_instructions": "Hold BOOTSEL button on the microcontroller board while connecting to power.",
+    "build": {
+        "lto": true
+    },
     "diode_direction": "COL2ROW",
     "features": {
         "bootmagic": true,
-        "command": false,
-        "console": false,
         "encoder": true,
         "extrakey": true,
-        "mousekey": true,
-        "nkro": true
+        "nkro": true,
+        "oled": true
     },
-    "matrix_pins": {
-        "cols": ["GP18", "GP19", "GP20", "GP7"],
-        "rows": ["GP10", "GP11", "GP12", "GP13"]
-    },
-    "processor": "RP2040",
-    "url": "",
-    "usb": {
-        "device_version": "1.0.0",
-        "pid": "0x2040",
-        "vid": "0xFEED"
-    },
+    "keyboard_name": "macropad_v2_rp2040",
     "layouts": {
         "LAYOUT": {
             "layout": [
@@ -45,5 +37,19 @@
                 {"matrix": [3, 3], "x": 3, "y": 3}
             ]
         }
+    },
+    "maintainer": "isoamyl50",
+    "manufacturer": "Hoang Nguyen",
+    "matrix_pins": {
+        "cols": ["GP18", "GP19", "GP20", "GP7"],
+        "rows": ["GP10", "GP11", "GP12", "GP13"]
+    },
+    "processor": "RP2040",
+    "url": "https://qmk.fm/keyboards/",
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x2040",
+        "vid": "0xFEED"
     }
 }
+

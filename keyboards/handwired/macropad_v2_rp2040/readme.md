@@ -5,8 +5,8 @@
 *A short description of the keyboard/project*
 
 * Keyboard Maintainer: [Hoang Nguyen](https://github.com/isoamyl50)
-* Hardware Supported: *The PCBs, controllers supported*
-* Hardware Availability: *Links to where you can find this hardware*
+* Hardware Supported: RP2040 Boards, matrix keymap and YD-040 rotary encoder.
+* How to build: [https://www.instructables.com/Programmable-Macropad-V2/](https://www.instructables.com/Programmable-Macropad-V2/)
 
 Make example for this keyboard (after setting up your build environment):
 
@@ -25,3 +25,6 @@ Enter the bootloader in 3 ways:
 * **Bootmagic reset**: Hold down the rotary encoder button and plug in the keyboard (or short GPx pin with ground) while plugging the board in.
 * **Double tap reset**: Press the RESET button (or short the RUN pin with ground) twice, quickly (less than 200 miliseconds between each press).
 * **The BOOTSEL button**: Hold down the BOOTSEL button on the microcontroller board (or short the corresponding pin with ground) while plugging the board in.
+
+---
+> *Note: this firmware does not use the 4 LED indicators. Please add it yourself.*

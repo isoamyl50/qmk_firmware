@@ -20,7 +20,8 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        KC_NO,                  KC_ESC,                 KC_NO,          KC_MUTE,
+        // COL1                 COL2                    COL3                    ENCODER
+        KC_NO,                  KC_ESC,                 QK_BOOT,                  KC_MUTE,
         KC_MEDIA_PREV_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_MEDIA_NEXT_TRACK,    KC_MUTE,
         KC_NO,                  KC_NO,                  KC_NO,                  KC_MUTE,
         KC_NO,                  KC_SPACE,               KC_KP_ENTER,            KC_MUTE

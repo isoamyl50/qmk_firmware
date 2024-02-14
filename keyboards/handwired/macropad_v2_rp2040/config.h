@@ -22,17 +22,27 @@
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 200U // Timeout window in ms in which the double tap can occur.
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_LED GP25 // Specify a optional status led by GPIO number which blinks when entering the bootloader
 
-// Hold Encoder button while plugging in to enter bootloader
+/*
+ * Audio and Startup Beep
+ *   refer RP2040 Datasheet for which PWM driver and channel to use with each pin
+ */
+// #define AUDIO_PIN GP15
+// #define AUDIO_PWM_DRIVER PWMD7
+// #define AUDIO_PWM_CHANNEL RP2040_PWM_CHANNEL_B
+// #define AUDIO_INIT_DELAY
+
+// #ifdef AUDIO_ENABLE
+// #   define STARTUP_SONG SONG(S__NOTE(_G5))
+// #endif
+
+/* Hold Encoder button while plugging in to enter bootloader */
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 3
 
-// Encoder pads
+/* Encoder pads */
 #define ENCODERS_PAD_A { GP9 }
 #define ENCODERS_PAD_B { GP8 }
 #define ENCODER_RESOLUTION 4
-
-// Encoder button
-#define DIP_SWITCH_PINS { GP7 }
 
 /*
  * Feature disable options
