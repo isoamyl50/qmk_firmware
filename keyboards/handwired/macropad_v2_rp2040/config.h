@@ -26,23 +26,46 @@
  * Audio and Startup Beep
  *   refer RP2040 Datasheet for which PWM driver and channel to use with each pin
  */
-// #define AUDIO_PIN GP15
-// #define AUDIO_PWM_DRIVER PWMD7
-// #define AUDIO_PWM_CHANNEL RP2040_PWM_CHANNEL_B
-// #define AUDIO_INIT_DELAY
+#ifdef AUDIO_ENABLE
+    #define STARTUP_SONG SONG(S__NOTE(_G5))
+    #define AUDIO_PIN GP15
+    #define AUDIO_PWM_DRIVER PWMD7
+    #define AUDIO_PWM_CHANNEL RP2040_PWM_CHANNEL_B
+    #define AUDIO_INIT_DELAY
+#endif
 
-// #ifdef AUDIO_ENABLE
-// #   define STARTUP_SONG SONG(S__NOTE(_G5))
-// #endif
+/* Bootmagic: Hold Encoder button while plugging in to enter bootloader */
+#ifdef BOOTMAGIC_LITE
+    #define BOOTMAGIC_LITE_ROW 0
+    #define BOOTMAGIC_LITE_COLUMN 2
+#endif
 
-/* Hold Encoder button while plugging in to enter bootloader */
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 3
+/* Combos */
+#ifdef COMBO_ENABLE
+    #define COMBO_MUST_PRESS_IN_ORDER
+    #define COMBO_TERM 65535
+    #define COMBO_NO_TIMER
+#endif
 
 /* Encoder pads */
-#define ENCODERS_PAD_A { GP9 }
-#define ENCODERS_PAD_B { GP8 }
-#define ENCODER_RESOLUTION 4
+#ifdef ENCODER_ENABLE
+    #define ENCODERS_PAD_A { GP9 }
+    #define ENCODERS_PAD_B { GP8 }
+    #define ENCODER_RESOLUTION 4
+#endif
+
+/* OLED Display */
+#ifdef OLED_ENABLE
+    #define OLED_DISPLAY_128X64
+    #undef I2C_DRIVER
+    #define I2C_DRIVER I2CD0
+    #define OLED_DISPLAY_ADDRESS 0x3C
+    #undef I2C1_SDA_PIN
+    #define I2C1_SDA_PIN GP16
+    #undef I2C1_SCL_PIN
+    #define I2C1_SCL_PIN GP17
+    #define OLED_BRIGHTNESS 127
+#endif
 
 /*
  * Feature disable options

@@ -9,7 +9,9 @@
     },
     "diode_direction": "COL2ROW",
     "features": {
+        "audios": false,
         "bootmagic": true,
+        "combos": true,
         "encoder": true,
         "extrakey": true,
         "nkro": true,

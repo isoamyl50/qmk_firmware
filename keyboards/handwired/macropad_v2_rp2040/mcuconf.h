@@ -16,7 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* Enable PWM Driver 7 */
 #include_next <mcuconf.h>
+
+/* Enable PWM Driver 7 */
 // #undef RP_PWM_USE_PWM7
 // #define RP_PWM_USE_PWM7 TRUE
+
+/* Enable I2C */
+#undef RP_I2C_USE_I2C0
+#define RP_I2C_USE_I2C0 TRUE
+
+#undef RP_I2C_USE_I2C1
+#define RP_I2C_USE_I2C1 TRUE
