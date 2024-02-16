@@ -1,5 +1,5 @@
 ## Audio
-# AUDIO_DRIVER = pwm_hardware
+AUDIO_DRIVER = pwm_hardware
 
 ## Combo
 # COMBO_ENABLE = yes

@@ -2,7 +2,7 @@
  *
  * This file if part of the QMK Firmware
  *
- * The QMK Firmware program is free software: you can redistribute it and/or modify
+ * The QMK Firmware is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
  * (at your option) any later version.
@@ -19,12 +19,16 @@
 #include_next <mcuconf.h>
 
 /* Enable PWM Driver 7 */
-// #undef RP_PWM_USE_PWM7
-// #define RP_PWM_USE_PWM7 TRUE
+#ifdef AUDIO_ENABLE
+    #undef RP_PWM_USE_PWM7
+    #define RP_PWM_USE_PWM7 TRUE
+#endif
 
 /* Enable I2C */
-#undef RP_I2C_USE_I2C0
-#define RP_I2C_USE_I2C0 TRUE
+#ifdef OLED_ENABLE
+    #undef RP_I2C_USE_I2C0
+    #define RP_I2C_USE_I2C0 TRUE
 
-#undef RP_I2C_USE_I2C1
-#define RP_I2C_USE_I2C1 TRUE
+    #undef RP_I2C_USE_I2C1
+    #define RP_I2C_USE_I2C1 TRUE
+#endif

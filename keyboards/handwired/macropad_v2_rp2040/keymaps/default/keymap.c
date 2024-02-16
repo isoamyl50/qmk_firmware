@@ -25,7 +25,7 @@ enum layer_names {
     _MEDIA_CONTROL,
     _NUMPAD,
     _PARALYZED,
-    _KB_FN,
+    _KB_SETTINGS,
 };
 
 // Keep track of the current layer
@@ -33,6 +33,9 @@ static uint8_t current_layer = 0;
 
 enum custom_keycodes {
     CC_FUNC = SAFE_RANGE,
+    CC_PREV,
+    CC_NEXT,
+    CC_SELECT,
     CC_NEXT_LAYER,
     CC_PREV_LAYER,
     CC_OLED_LGHT,
@@ -40,7 +43,7 @@ enum custom_keycodes {
 };
 
 // Keep track of if CC_FUNC is pressed
-static bool cc_func_pressed = false;
+static bool is_in_settings = false;
 
 void keyboard_pre_init_user(void) {
     setPinOutput(GP25);
@@ -87,11 +90,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_1,   KC_2,   KC_3,       KC_TRNS
     ),
     /* FN key */
-    [_KB_FN] = LAYOUT(
-        KC_NO,   CC_OLED_LGHT,   KC_TRNS, QK_REBOOT,
-        CC_OLED_DARK,   KC_NO,   KC_NO,   QK_REBOOT,
-        KC_NO,   KC_NO,   KC_NO,   QK_REBOOT,
-        KC_NO,   KC_NO,   KC_NO,   QK_REBOOT
+    [_KB_SETTINGS] = LAYOUT(
+        KC_NO,   CC_OLED_LGHT, KC_TRNS, QK_REBOOT,
+        CC_OLED_DARK,   KC_NO,     KC_NO,   QK_REBOOT,
+        KC_NO,   KC_NO,     KC_NO,   QK_REBOOT,
+        KC_NO,   KC_NO,     KC_NO,   QK_REBOOT
     ),
     /* Paralyzed  */
     [_PARALYZED] = LAYOUT(
@@ -108,11 +111,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         /* Function key */
         case CC_FUNC:
             if (record->event.pressed) {
-                layer_move(_KB_FN);
-                cc_func_pressed = true;
-            } else {
-                layer_move(current_layer);
-                cc_func_pressed = false;
+                layer_move(_KB_SETTINGS);
+                is_in_settings ^= 1;
+                if (!is_in_settings) {
+                    layer_move(current_layer);
+                }
             }
             return false;  // Skip all further processing of this key
         case CC_PREV_LAYER:
@@ -179,7 +182,7 @@ combo_t key_combos[] = {
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_MEDIA_CONTROL] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [_NUMPAD] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS)},
-    [_KB_FN] = {ENCODER_CCW_CW(CC_PREV_LAYER, CC_NEXT_LAYER)},
+    [_KB_SETTINGS] = {ENCODER_CCW_CW(CC_PREV_LAYER, CC_NEXT_LAYER)},
     [_PARALYZED] = {ENCODER_CCW_CW(KC_NO, KC_NO)},
 };
 #endif
@@ -197,7 +200,7 @@ static void render_logo(void) {
 }
 
 bool oled_task_user(void) {
-    if (cc_func_pressed) {
+    if (is_in_settings) {
         char brightness_buf[4];
         oled_set_cursor(1, 0);
         oled_write_P(PSTR("Brightness: "), false);
@@ -215,20 +218,20 @@ bool oled_task_user(void) {
     // Layer status
     switch (current_layer) {
         case _MEDIA_CONTROL:
-            oled_write_P(PSTR("Media\n"), cc_func_pressed);
+            oled_write_P(PSTR("Media\n"), is_in_settings);
             break;
         case _NUMPAD:
-            oled_write_P(PSTR("Numpad\n"), cc_func_pressed);
+            oled_write_P(PSTR("Numpad\n"), is_in_settings);
             break;
-        case _KB_FN:
-            oled_write_P(PSTR("Func\n"), cc_func_pressed);
+        case _KB_SETTINGS:
+            oled_write_P(PSTR("Settings\n"), is_in_settings);
             break;
         case _PARALYZED:
-            oled_write_P(PSTR("Paralyzed\n"), cc_func_pressed);
+            oled_write_P(PSTR("Paralyzed\n"), is_in_settings);
             break;
         default:
             // Or use the write_ln shortcut over adding '\n' to the end of your string
-            oled_write_ln_P(PSTR("Undefined"), cc_func_pressed);
+            oled_write_ln_P(PSTR("Undefined"), is_in_settings);
     }
 
     return false;
@@ -239,7 +242,7 @@ void oled_render_boot(bool bootloader) {
     render_logo();
     oled_set_cursor(0, 3);
     oled_write_ln_P(PSTR("Rebooting...\n"), false);
-    oled_write_ln_P(PSTR("Hold fn for DFU."), false);
+    oled_write_ln_P(PSTR("Hold knob for DFU."), false);
     oled_write_ln_P(PSTR("Blue LED will blink\nif is in DFU"), false);
     oled_render_dirty(true);
 }

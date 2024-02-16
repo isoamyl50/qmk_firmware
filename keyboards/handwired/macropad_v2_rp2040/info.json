@@ -9,7 +9,7 @@
     },
     "diode_direction": "COL2ROW",
     "features": {
-        "audios": false,
+        "audio": true,
         "bootmagic": true,
         "combos": true,
         "encoder": true,

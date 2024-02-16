@@ -2,7 +2,7 @@
  *
  * This file if part of the QMK Firmware
  *
- * The QMK Firmware program is free software: you can redistribute it and/or modify
+ * The QMK Firmware is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
  * (at your option) any later version.
@@ -27,17 +27,17 @@
  *   refer RP2040 Datasheet for which PWM driver and channel to use with each pin
  */
 #ifdef AUDIO_ENABLE
-    #define STARTUP_SONG SONG(S__NOTE(_G5))
     #define AUDIO_PIN GP15
     #define AUDIO_PWM_DRIVER PWMD7
     #define AUDIO_PWM_CHANNEL RP2040_PWM_CHANNEL_B
     #define AUDIO_INIT_DELAY
+    #define STARTUP_SONG SONG(S__NOTE(_G5))
 #endif
 
-/* Bootmagic: Hold Encoder button while plugging in to enter bootloader */
+/* Bootmagic: Hold knob button while plugging in to enter bootloader */
 #ifdef BOOTMAGIC_LITE
     #define BOOTMAGIC_LITE_ROW 0
-    #define BOOTMAGIC_LITE_COLUMN 2
+    #define BOOTMAGIC_LITE_COLUMN 3
 #endif
 
 /* Combos */
